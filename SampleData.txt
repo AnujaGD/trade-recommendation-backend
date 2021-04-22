@@ -1,0 +1,126 @@
+Get Recommendations(Top 5) after selecting market cap-->
+
+Endpoint: http://localhost:8085/getRecommendations/{marketCap}
+
+eg. http://localhost:8085/getRecommendations/Large%20Cap
+
+output: 
+
+[
+   {
+      "stockName":"Dr. Reddy's Laboratories Limited",
+      "stockSymbol":"DRREDDY.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"5221.0"
+   },
+   {
+      "stockName":"JSW Steel Limited",
+      "stockSymbol":"JSWSTEEL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"633.35"
+   },
+   {
+      "stockName":"Wipro Limited",
+      "stockSymbol":"WIPRO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"484.9"
+   },
+   {
+      "stockName":"Sun Pharmaceutical Industries Limited",
+      "stockSymbol":"SUNPHARMA.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"654.45"
+   },
+   {
+      "stockName":"Bajaj Finserv Ltd.",
+      "stockSymbol":"BAJAJFINSV.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"9728.95"
+   }
+]
+
+
+----------------------------------------------------------------------
+
+GET QUOTES OF MULTIPLE STOCKS-->
+
+endpoint: http://localhost:8085/getQuote/{stockSymbol}
+
+--{stockSymbol} can be a single stock or list of stocks seperated by ","
+
+eg.  http://localhost:8085/getQuote/HDFCBANK.NS,ADANIPORTS.NS
+
+output:
+
+[
+   {
+      "stockName":"HDFC Bank Limited",
+      "stockSymbol":"HDFCBANK.NS",
+      "marketCap":"",
+      "currentPrice":"1378.0"
+   },
+   {
+      "stockName":"Adani Ports and Special Economic Zone Limited",
+      "stockSymbol":"ADANIPORTS.NS",
+      "marketCap":"",
+      "currentPrice":"722.55"
+   }
+]
+
+
+-----------------------------------------------------------------
+
+GET QUOTE BY MARKET CAP-->
+
+endpoint : http://localhost:8085/getQuoteByMarketCap/{marketCap}
+
+eg.  http://localhost:8085/getQuoteByMarketCap/Large%20Cap
+
+output:
+
+      "currentPrice":"657.25"
+   },
+   {
+      "stockName":"Tata Consumer Products Limited",
+      "stockSymbol":"TATACONSUM.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"670.85"
+   },
+   {
+      "stockName":"Tata Motors Limited",
+      "stockSymbol":"TATAMOTORS.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"296.6"
+   },
+   {
+      "stockName":"Tata Steel Limited",
+      "stockSymbol":"TATASTEEL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"929.5"
+   },
+   {
+      "stockName":"Tech Mahindra Limited",
+      "stockSymbol":"TECHM.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"979.5"
+   },
+   {
+      "stockName":"UPL Limited",
+      "stockSymbol":"UPL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"594.6"
+   },
+   {
+      "stockName":"UltraTech Cement Limited",
+      "stockSymbol":"ULTRACEMCO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"6218.2"
+   },
+   {
+      "stockName":"Wipro Limited",
+      "stockSymbol":"WIPRO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"486.8"
+   }
+]
+
