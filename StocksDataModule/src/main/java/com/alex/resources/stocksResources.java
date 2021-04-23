@@ -30,20 +30,25 @@ public class stocksResources {
 
 	@Autowired
 	private CsvToDatabase csv2db;
-	private  int FROM_API_FLAG = 0;
-//	@GetMapping(path = "/updateNiftyCompanies")
-//	private void updateNiftyCompanies() {
-//		try {
-//			csv2db.csvToDb("D://B@//ind_nifty50list.csv");
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	@GetMapping(path = "/updateNiftyCompanies")
+	private void updateNiftyCompanies() {
+		try {
+			
+			csv2db.csvToDb("niftylists\\large.csv","Large Cap");
+			csv2db.csvToDb("niftylists\\small.csv","Small Cap");
+			csv2db.csvToDb("niftylists\\mid.csv","Mid Cap");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 //	@GetMapping(path = "/updateMarketCap")
 //	private void updateDbMarketCap() {
 //		csv2db.updateMarketCap();
 //	}
+
+	
+	private  int FROM_API_FLAG = 0;
 
 	@Autowired
 	private StockService stockService;

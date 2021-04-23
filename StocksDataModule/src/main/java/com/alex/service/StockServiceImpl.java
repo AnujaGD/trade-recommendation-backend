@@ -57,6 +57,7 @@ public class StockServiceImpl implements StockService {
 	public Stock[] getStocksOfMarketCap(String marketCap) {
 		// TODO Auto-generated method stub
 		return stockDao.getStockDataFromLibrary(marketCap);
+		
 	}
 
 	@Override

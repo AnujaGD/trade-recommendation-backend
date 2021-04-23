@@ -35,12 +35,13 @@ public class CsvToDatabaseImpl implements CsvToDatabase {
 	private final BigInteger LOW_CAP_LL = new BigInteger("22521045000"); // 300 million dollars
 
 	@Override
-	public void csvToDb(String path) throws FileNotFoundException {
+	public void csvToDb(String path,String marketCap) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		
 	
-		
-		Scanner sc = new Scanner(new File(path));
+		File f = new File(path);
+		System.out.println(f.getAbsolutePath());
+		Scanner sc = new Scanner(f);
 		sc.useDelimiter("\n");
 		ArrayList<String> stockNamesandSymbols = new ArrayList<>();
 
@@ -48,7 +49,7 @@ public class CsvToDatabaseImpl implements CsvToDatabase {
 			stockNamesandSymbols.add(sc.next());
 		}
 
-		insertIntodb(stockNamesandSymbols);
+		insertIntodb(stockNamesandSymbols,marketCap);
 
 	}
 
@@ -56,7 +57,7 @@ public class CsvToDatabaseImpl implements CsvToDatabase {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insertIntodb(ArrayList<String> stockNamesandSymbols) {
+	public void insertIntodb(ArrayList<String> stockNamesandSymbols,String marketCap) {
 		String sql = "insert into stocks (stockName,stockSymbol,marketCap) values (?,?,?)";
 		int totalValues = stockNamesandSymbols.size();
 		int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR };
@@ -64,7 +65,7 @@ public class CsvToDatabaseImpl implements CsvToDatabase {
 
 		for (int i = 1; i < totalValues; i++) {
 			params = new Object[] { stockNamesandSymbols.get(i).split(",")[0],
-					stockNamesandSymbols.get(i).split(",")[1], "" };
+					stockNamesandSymbols.get(i).split(",")[1], marketCap };
 			jdbcTemplate.update(sql, params, types);
 		}
 
