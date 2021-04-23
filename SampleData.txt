@@ -78,49 +78,355 @@ eg.  http://localhost:8085/getQuoteByMarketCap/Large%20Cap
 
 output:
 
-      "currentPrice":"657.25"
+      [
+   {
+      "stockName":"Adani Ports and Special Economic Zone Limited",
+      "stockSymbol":"ADANIPORTS.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"725.35",
+      "marketOpenPrice":"736.45"
+   },
+   {
+      "stockName":"Asian Paints Limited",
+      "stockSymbol":"ASIANPAINT.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"2517.95",
+      "marketOpenPrice":"2527.1"
+   },
+   {
+      "stockName":"Axis Bank Limited",
+      "stockSymbol":"AXISBANK.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"671.35",
+      "marketOpenPrice":"656.0"
+   },
+   {
+      "stockName":"Bajaj Auto Limited",
+      "stockSymbol":"BAJAJ-AUTO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"3672.5",
+      "marketOpenPrice":"3680.0"
+   },
+   {
+      "stockName":"Bajaj Finance Limited",
+      "stockSymbol":"BAJFINANCE.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"4667.8",
+      "marketOpenPrice":"4621.1"
+   },
+   {
+      "stockName":"Bajaj Finserv Ltd.",
+      "stockSymbol":"BAJAJFINSV.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"9916.65",
+      "marketOpenPrice":"9740.0"
+   },
+   {
+      "stockName":"Bharat Petroleum Corporation Limited",
+      "stockSymbol":"BPCL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"423.05",
+      "marketOpenPrice":"417.3"
+   },
+   {
+      "stockName":"Bharti Airtel Limited",
+      "stockSymbol":"BHARTIARTL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"522.6",
+      "marketOpenPrice":"529.0"
+   },
+   {
+      "stockName":"Britannia Industries Limited",
+      "stockSymbol":"BRITANNIA.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"3650.3",
+      "marketOpenPrice":"3755.0"
+   },
+   {
+      "stockName":"Cipla Limited",
+      "stockSymbol":"CIPLA.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"935.6",
+      "marketOpenPrice":"944.35"
+   },
+   {
+      "stockName":"Coal India Limited",
+      "stockSymbol":"COALINDIA.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"126.15",
+      "marketOpenPrice":"124.95"
+   },
+   {
+      "stockName":"Divi's Laboratories Limited",
+      "stockSymbol":"DIVISLAB.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"3779.75",
+      "marketOpenPrice":"3751.0"
+   },
+   {
+      "stockName":"Dr. Reddy's Laboratories Limited",
+      "stockSymbol":"DRREDDY.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"5066.7",
+      "marketOpenPrice":"5228.0"
+   },
+   {
+      "stockName":"Eicher Motors Limited",
+      "stockSymbol":"EICHERMOT.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"2317.3",
+      "marketOpenPrice":"2310.0"
+   },
+   {
+      "stockName":"Grasim Industries Limited",
+      "stockSymbol":"GRASIM.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1278.1",
+      "marketOpenPrice":"1299.0"
+   },
+   {
+      "stockName":"HCL Technologies Limited",
+      "stockSymbol":"HCLTECH.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"955.65",
+      "marketOpenPrice":"964.0"
+   },
+   {
+      "stockName":"HDFC Bank Limited",
+      "stockSymbol":"HDFCBANK.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1414.15",
+      "marketOpenPrice":"1409.0"
+   },
+   {
+      "stockName":"HDFC Life Insurance Company Limited",
+      "stockSymbol":"HDFCLIFE.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"686.35",
+      "marketOpenPrice":"679.0"
+   },
+   {
+      "stockName":"Hero MotoCorp Limited",
+      "stockSymbol":"HEROMOTOCO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"2864.05",
+      "marketOpenPrice":"2818.0"
+   },
+   {
+      "stockName":"Hindalco Industries Limited",
+      "stockSymbol":"HINDALCO.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"349.5",
+      "marketOpenPrice":"354.05"
+   },
+   {
+      "stockName":"Hindustan Unilever Limited",
+      "stockSymbol":"HINDUNILVR.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"2307.75",
+      "marketOpenPrice":"2340.0"
+   },
+   {
+      "stockName":"Housing Development Finance Corporation Limited",
+      "stockSymbol":"HDFC.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"2497.35",
+      "marketOpenPrice":"2455.05"
+   },
+   {
+      "stockName":"ICICI Bank Limited",
+      "stockSymbol":"ICICIBANK.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"569.95",
+      "marketOpenPrice":"569.9"
+   },
+   {
+      "stockName":"ITC Limited",
+      "stockSymbol":"ITC.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"205.35",
+      "marketOpenPrice":"204.25"
+   },
+   {
+      "stockName":"Indian Oil Corporation Limited",
+      "stockSymbol":"IOC.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"88.05",
+      "marketOpenPrice":"87.65"
+   },
+   {
+      "stockName":"IndusInd Bank Limited",
+      "stockSymbol":"INDUSINDBK.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"850.0",
+      "marketOpenPrice":"830.0"
+   },
+   {
+      "stockName":"Infosys Limited",
+      "stockSymbol":"INFY.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1333.8",
+      "marketOpenPrice":"1343.0"
+   },
+   {
+      "stockName":"JSW Steel Limited",
+      "stockSymbol":"JSWSTEEL.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"635.4",
+      "marketOpenPrice":"641.0"
+   },
+   {
+      "stockName":"Kotak Mahindra Bank Limited",
+      "stockSymbol":"KOTAKBANK.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1734.2",
+      "marketOpenPrice":"1733.9"
+   },
+   {
+      "stockName":"Larsen & Toubro Limited",
+      "stockSymbol":"LT.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1322.9",
+      "marketOpenPrice":"1330.0"
+   },
+   {
+      "stockName":"Mahindra & Mahindra Limited",
+      "stockSymbol":"M&M.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"777.9",
+      "marketOpenPrice":"796.0"
+   },
+   {
+      "stockName":"Maruti Suzuki India Limited",
+      "stockSymbol":"MARUTI.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"6676.1",
+      "marketOpenPrice":"6560.0"
+   },
+   {
+      "stockName":"NTPC Limited",
+      "stockSymbol":"NTPC.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"102.55",
+      "marketOpenPrice":"98.0"
+   },
+   {
+      "stockName":"Nestlé India Limited",
+      "stockSymbol":"NESTLEIND.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"16625.7",
+      "marketOpenPrice":"16785.0"
+   },
+   {
+      "stockName":"Oil and Natural Gas Corporation Limited",
+      "stockSymbol":"ONGC.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"102.4",
+      "marketOpenPrice":"102.0"
+   },
+   {
+      "stockName":"Power Grid Corporation of India Limited",
+      "stockSymbol":"POWERGRID.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"211.15",
+      "marketOpenPrice":"204.3"
+   },
+   {
+      "stockName":"Reliance Industries Limited",
+      "stockSymbol":"RELIANCE.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1904.35",
+      "marketOpenPrice":"1906.0"
+   },
+   {
+      "stockName":"SBI Life Insurance Company Limited",
+      "stockSymbol":"SBILIFE.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"922.85",
+      "marketOpenPrice":"896.35"
+   },
+   {
+      "stockName":"Shree Cement Limited",
+      "stockSymbol":"SHREECEM.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"28106.3",
+      "marketOpenPrice":"28499.0"
+   },
+   {
+      "stockName":"State Bank of India",
+      "stockSymbol":"SBIN.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"336.45",
+      "marketOpenPrice":"331.65"
+   },
+   {
+      "stockName":"Sun Pharmaceutical Industries Limited",
+      "stockSymbol":"SUNPHARMA.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"637.95",
+      "marketOpenPrice":"636.5"
+   },
+   {
+      "stockName":"Tata Consultancy Services Limited",
+      "stockSymbol":"TCS.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"3109.5",
+      "marketOpenPrice":"3105.0"
    },
    {
       "stockName":"Tata Consumer Products Limited",
       "stockSymbol":"TATACONSUM.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"670.85"
+      "currentPrice":"664.6",
+      "marketOpenPrice":"667.0"
    },
    {
       "stockName":"Tata Motors Limited",
       "stockSymbol":"TATAMOTORS.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"296.6"
+      "currentPrice":"294.0",
+      "marketOpenPrice":"291.0"
    },
    {
       "stockName":"Tata Steel Limited",
       "stockSymbol":"TATASTEEL.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"929.5"
+      "currentPrice":"925.6",
+      "marketOpenPrice":"929.8"
    },
    {
       "stockName":"Tech Mahindra Limited",
       "stockSymbol":"TECHM.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"979.5"
+      "currentPrice":"950.2",
+      "marketOpenPrice":"966.5"
+   },
+   {
+      "stockName":"Titan Company Limited",
+      "stockSymbol":"TITAN.NS",
+      "marketCap":"Large Cap",
+      "currentPrice":"1461.45",
+      "marketOpenPrice":"1478.0"
    },
    {
       "stockName":"UPL Limited",
       "stockSymbol":"UPL.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"594.6"
+      "currentPrice":"585.4",
+      "marketOpenPrice":"592.1"
    },
    {
       "stockName":"UltraTech Cement Limited",
       "stockSymbol":"ULTRACEMCO.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"6218.2"
+      "currentPrice":"6067.9",
+      "marketOpenPrice":"6094.0"
    },
    {
       "stockName":"Wipro Limited",
       "stockSymbol":"WIPRO.NS",
       "marketCap":"Large Cap",
-      "currentPrice":"486.8"
+      "currentPrice":"475.7",
+      "marketOpenPrice":"483.55"
    }
 ]
-

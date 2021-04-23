@@ -19,13 +19,11 @@ insert into users values (105,"Michael Fisher","20775686","michael@email.com","m
 
 create table stocks(
 stockId bigint primary key not null auto_increment,
-stockName varchar(50),
+stockName varchar(100),
 stockSymbol varchar(15),
 marketCap varchar (10)
 );
 
 select * from stocks;
-delete from stocks where stockSymbol=null;
-update stocks set stockSymbol=inds where stockId=26;
-update stocks set marketCap= "Large Cap" where stockId=50
+
 
