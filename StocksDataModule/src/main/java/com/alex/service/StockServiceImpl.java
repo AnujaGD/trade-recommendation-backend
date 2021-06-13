@@ -35,35 +35,48 @@ public class StockServiceImpl implements StockService {
 	public Stock[] getQuote(String[] stockSymbol) {
 		Stock stockToreturn[] = new Stock[stockSymbol.length];
 		try {
-			 Map<String, yahoofinance.Stock>stocks =  stockDao.getQuote(stockSymbol);
-			 for(int i=0;i<stockSymbol.length;i++)
-			 {
-				 if(stocks.get(stockSymbol[i])!=null)
-				 {
-					 stockToreturn[i] = new Stock(stocks.get(stockSymbol[i]).getName(), stockSymbol[i], "",
-								String.valueOf(stocks.get(stockSymbol[i]).getQuote().getPrice()));
-				 }
-			 }
+			Map<String, yahoofinance.Stock> stocks = stockDao.getQuote(stockSymbol);
+			for (int i = 0; i < stockSymbol.length; i++) {
+				if (stocks.get(stockSymbol[i]) != null) {
+					stockToreturn[i] = new Stock(stocks.get(stockSymbol[i]).getName(), stockSymbol[i], "",
+							String.valueOf(stocks.get(stockSymbol[i]).getQuote().getPrice()),
+							String.valueOf(stocks.get(stockSymbol[i]).getQuote().getOpen()));
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			stockToreturn[0] = new Stock();
+			stockToreturn[0].setStockSymbol("error:"+e.toString());
+			
 		}
 		return stockToreturn;
 
 	}
 
-
 	@Override
 	public Stock[] getStocksOfMarketCap(String marketCap) {
 		// TODO Auto-generated method stub
-		return stockDao.getStockDataFromLibrary(marketCap);
-		
+		try {
+			return stockDao.getStockDataFromLibrary(marketCap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	@Override
 	public Stock[] getRecommendations(String marketCap) {
-		// TODO Auto-generated method stub
-		Map<String, yahoofinance.Stock> stocks = stockDao.getRecommendations(marketCap);
+		// TODO Auto-generated method stub 
+		Map<String, yahoofinance.Stock> stocks =null;
+		try {
+			stocks = stockDao.getRecommendations(marketCap);
+		} catch (IOException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 
 		Calendar from = Calendar.getInstance();
 		Calendar to = Calendar.getInstance();
@@ -80,6 +93,13 @@ public class StockServiceImpl implements StockService {
 		double initialPrice = 0;
 		List<HistoricalQuote> temp;
 		double finalPrice = 0;
+		
+		//using streams
+		
+//		stockGrowthParameter = stocks.keySet().parallelStream()
+//				.filter(p -> stockGrowthParameter.put(p, findStockGrowthParameter(p)));
+		
+		
 		for (int i = 0; i < stockSymbols.length; i++) {
 			if (stocks.get(stockSymbols[i]) != null) {
 				try {
@@ -111,7 +131,7 @@ public class StockServiceImpl implements StockService {
 		for(String s :sortedStockGrowthParameters.keySet())
 		{
 			recommendedStocks[cnt++] = new Stock(stocks.get(s).getName(), s, marketCap,
-					String.valueOf(stocks.get(s).getQuote().getPrice()));
+					String.valueOf(stocks.get(s).getQuote().getPrice()),String.valueOf(stocks.get(s).getQuote().getOpen()));
 			if(cnt==5)
 			{
 				break;
@@ -125,14 +145,16 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public Stock[] getQuoteFromAPI(String[] stockSymbol) {
 		// TODO Auto-generated method stub
-		
-		return null;
+
+		return formatJSON(stockDao.getQuotesFromAPI(stockSymbol), "");
 	}
 
 	@Override
 	public Stock[] getStocksOfMarketCapFromAPI(String marketCap) {
 		// TODO Auto-generated method stub
-		return null;
+
+		return formatJSON(stockDao.getStocksOfMarketCapFromAPI(marketCap), marketCap);
+
 	}
 
 	@Override
@@ -140,29 +162,42 @@ public class StockServiceImpl implements StockService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public Stock[] formatJSON(String response) {
-		Stock[] recommendations = new Stock[50];
 
-		return recommendations;
+	public Stock[] formatJSON(String response, String marketCap) {
 
-//		ArrayList<String> marketCapValues = new ArrayList<>();
-//		JSONObject jsonObject=null;
-//		try {
-//			jsonObject = (JSONObject)new JSONParser().parse(response);
-//		} catch (org.json.simple.parser.ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	   JSONObject response_obj = (JSONObject) jsonObject.get("quoteResponse");
-//	   JSONArray array = (JSONArray) response_obj.get("result");
-//	   JSONObject[] values = new JSONObject[array.size()];
+		ArrayList<String> regularMarketPriceList = new ArrayList<>();
+		ArrayList<String> marketOpenPrice = new ArrayList<>();
+		ArrayList<String> stockNames = new ArrayList<>();
+		ArrayList<String> stockSymbols = new ArrayList<>();
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = (JSONObject) new JSONParser().parse(response);
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JSONObject response_obj = (JSONObject) jsonObject.get("quoteResponse");
+		JSONArray array = (JSONArray) response_obj.get("result");
+		JSONObject[] values = new JSONObject[array.size()];
 //	   System.out.println(array.size());
-//	   for(int i=0;i<array.size();i++)
-//	   {
-//		   values[i] =(JSONObject) array.get(i);
-//		   marketCapValues.add((String) String.valueOf(values[i].get("marketCap")));
-//	   }
-//	return response;
+		for (int i = 0; i < array.size(); i++) {
+			values[i] = (JSONObject) array.get(i);
+			regularMarketPriceList.add((String) String.valueOf(values[i].get("regularMarketPrice")));
+
+			marketOpenPrice.add((String) String.valueOf(values[i].get("marketOpenPrice")));
+
+			stockNames.add((String) String.valueOf(values[i].get("longName")));
+			stockSymbols.add((String) String.valueOf(values[i].get("symbol")));
+
+		}
+
+		Stock[] stocksToReturn = new Stock[array.size()];
+
+		for (int i = 0; i < array.size(); i++) {
+			stocksToReturn[i] = new Stock(stockNames.get(i), stockSymbols.get(i), marketCap,
+					regularMarketPriceList.get(i),marketOpenPrice.get(i)
+					);
+		}
+		return stocksToReturn;
 	}
 }

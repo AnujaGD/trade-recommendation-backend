@@ -6,7 +6,22 @@ public class Stock {
 	private String stockSymbol;
 	private String marketCap;
 	private String currentPrice;
+	private String marketOpenPrice;
 	
+	public Stock(String stockName, String stockSymbol, String marketCap, String currentPrice, String marketOpenPrice) {
+		super();
+		this.stockName = stockName;
+		this.stockSymbol = stockSymbol;
+		this.marketCap = marketCap;
+		this.currentPrice = currentPrice;
+		this.marketOpenPrice = marketOpenPrice;
+	}
+	public String getMarketOpenPrice() {
+		return marketOpenPrice;
+	}
+	public void setMarketOpenPrice(String marketOpenPrice) {
+		this.marketOpenPrice = marketOpenPrice;
+	}
 	public Stock()
 	{
 		

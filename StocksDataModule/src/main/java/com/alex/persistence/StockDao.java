@@ -11,8 +11,8 @@ import com.alex.bean.Stock;
 public interface StockDao {
 
 	public Map<String, yahoofinance.Stock> getQuote(String[] stockSymbol) throws IOException;
-	public Map<String, yahoofinance.Stock>  getRecommendations(String marketCap);
-	public Stock[] getStockDataFromLibrary(String marketCap);
+	public Map<String, yahoofinance.Stock>  getRecommendations(String marketCap) throws IOException;
+	public Stock[] getStockDataFromLibrary(String marketCap) throws IOException;
 	
 	public String getStocksOfMarketCapFromAPI(String marketCap);
 	public String getRecommendationsFromAPI(String marketCap);

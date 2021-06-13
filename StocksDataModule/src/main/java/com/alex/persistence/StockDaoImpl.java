@@ -28,23 +28,25 @@ import com.alex.utils.StockRowMapper;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-
+import java.util.*;
 @Component
 public class StockDaoImpl implements StockDao {
 
+//	-------------------------USING LIBRARY-----------------------------------------
+
+	// GET DATA OF SOME SYMBOLS**********************************************
+
 	@Override
 	public Map<String, yahoofinance.Stock> getQuote(String[] stockSymbol) throws IOException {
-//		 TODO Auto-generated method stub
 		Map<String, yahoofinance.Stock> stocks = YahooFinance.get(stockSymbol);
 
 		return stocks;
 	}
 
-	
+	// GET TOP 5 STOCKS **********************************************
 
 	@Override
-	public Map<String, yahoofinance.Stock> getRecommendations(String marketCap) {
-		// TODO Auto-generated method stub
+	public Map<String, yahoofinance.Stock> getRecommendations(String marketCap) throws IOException {
 
 		String[] stockSymbols = getStocksFromMarketCapDB(marketCap);
 
@@ -53,12 +55,8 @@ public class StockDaoImpl implements StockDao {
 					.concat("NS");
 		}
 		Map<String, yahoofinance.Stock> stocks = null;
-		try {
-			stocks = YahooFinance.get(stockSymbols, true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		stocks = YahooFinance.get(stockSymbols, true);
 
 		return stocks;
 	}
@@ -66,44 +64,79 @@ public class StockDaoImpl implements StockDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	// GET STOCKS OF CERTAIN MARKET
+	// CAP**********************************************
+
 	@Override
-	public Stock[] getStockDataFromLibrary(String marketCap) {
+	public Stock[] getStockDataFromLibrary(String marketCap) throws IOException {
 
 		String[] stockSymbols = getStocksFromMarketCapDB(marketCap);
 
 		for (int i = 0; i < stockSymbols.length; i++) {
+//			System.out.println(stockSymbols[i]);
 			stockSymbols[i] = stockSymbols[i].replace(stockSymbols[i].charAt(stockSymbols[i].length() - 1), '.')
 					.concat("NS");
+//			System.out.println(stockSymbols[i]);
 		}
 		Map<String, yahoofinance.Stock> stocks = null;
 //		String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
-		try {
-			stocks = YahooFinance.get(stockSymbols);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // single request
-		Stock stockstoReturn[] = new Stock[stockSymbols.length];
-		for (int i = 0; i < stockSymbols.length; i++) {
-			if (stocks.get(stockSymbols[i]) != null) {
 
-				// System.out.println(stocks.get(stockSymbols[i]).getDividend());
+		stocks = YahooFinance.get(stockSymbols);
+		// single request
+		System.out.println(stocks.size());
+		Stock stockstoReturn[] = new Stock[stocks.size()];
+		for (int i = 0; i < stocks.size(); i++) {
+//			System.out.println(stocks.get(stockSymbols[i]));
+			if (stocks.get(stockSymbols[i]) != null ) {
+//				System.out.println(i);
+//				 System.out.println(stocks.get(stockSymbols[i]).getName());
 				stockstoReturn[i] = new Stock(stocks.get(stockSymbols[i]).getName(), stockSymbols[i], marketCap,
-						String.valueOf(stocks.get(stockSymbols[i]).getQuote().getPrice()));
+						String.valueOf(stocks.get(stockSymbols[i]).getQuote().getPrice()),
+						String.valueOf(stocks.get(stockSymbols[i]).getQuote().getOpen()));
 
 			}
 
 		}
+		
 
+//		for(int i=0;i<stockstoReturn.length;i++)
+//		{
+//			System.out.println(stockstoReturn[i].getStockName());
+//		}
 		return stockstoReturn;
 
 	}
 
-	// get data from database
-	
+//	-------------------------USING API-----------------------------------------
 
+	// GET STOCKS OF CERTAIN MARKET
+	// CAP**********************************************
 	@Override
 	public String getStocksOfMarketCapFromAPI(String marketCap) {
+		// TODO Auto-generated method stub
+		String[] stockSymbols = getStocksFromMarketCapDB(marketCap);
+
+		String stockSymbol_str = "";
+		for (String s : stockSymbols) {
+			stockSymbol_str = stockSymbol_str + s.replace(s.charAt(s.length() - 1), '.').concat("NS") + ",";
+		}
+
+		String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=IN&symbols="
+				+ stockSymbol_str;
+//		String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=+"
+//				+ stockSymbol_str + "&range=1d&region=IN";
+		// System.out.println(URL);
+		System.out.println(URL);
+//		 return null;
+		return callApi(URL);
+
+	}
+
+	// GET TOP 5 STOCKS **********************************************
+	@Override
+	public String getRecommendationsFromAPI(String marketCap) {
+		// TODO Auto-generated method stub
+
 		// TODO Auto-generated method stub
 		String[] stockSymbols = getStocksFromMarketCapDB(marketCap);
 
@@ -113,51 +146,31 @@ public class StockDaoImpl implements StockDao {
 		}
 		String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=+"
 				+ stockSymbol_str + "&range=1d&region=IN";
-		//System.out.println(URL);
+		// System.out.println(URL);
 		return callApi(URL);
-		
-		
 	}
 
-	@Override
-	public String getRecommendationsFromAPI(String marketCap) {
-		// TODO Auto-generated method stub
-		
-		// TODO Auto-generated method stub
-				String[] stockSymbols = getStocksFromMarketCapDB(marketCap);
-
-				String stockSymbol_str = "";
-				for (String s : stockSymbols) {
-					stockSymbol_str = stockSymbol_str + s + ",";
-				}
-				String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=+"
-						+ stockSymbol_str + "&range=1d&region=IN";
-				//System.out.println(URL);
-				return callApi(URL);
-	}
-
-
-
+	// GET DATA OF SOME SYMBOLS**********************************************
 	@Override
 	public String getQuotesFromAPI(String[] stockSymbols) {
-		
-		
+
+		String stockSymbols_str = "";
 		for (int i = 0; i < stockSymbols.length; i++) {
-			stockSymbols[i] = stockSymbols[i].replace(stockSymbols[i].charAt(stockSymbols[i].length() - 1), '.')
-					.concat("NS");
+			stockSymbols_str = stockSymbols[i].concat(".NS");
 		}
-		
+		String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=IN&symbols="
+				+ stockSymbols_str;
+
+		System.out.println(URL);
 		// TODO Auto-generated method stub
-		String URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=+"
-				+ stockSymbols+ "&range=1d&region=IN";
-		//System.out.println(URL);
+
+//		 return null;
 		return callApi(URL);
 	}
-	
-	
-	//HELPER FUNCTIONS ---------------------------------------------------------------------
-	
-	
+
+//	-------------------------HELPER FUNCTIONS-----------------------------------------
+
+	// GET DATA FROM DATABASE**********************************************
 	@SuppressWarnings("deprecation")
 	public String[] getStocksFromMarketCapDB(String marketCap) {
 
@@ -182,7 +195,8 @@ public class StockDaoImpl implements StockDao {
 		return stocks;
 
 	}
-	
+
+	// CALL API**********************************************
 	public String callApi(String URL) {
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(URL))
 				.header("x-rapidapi-key", "5369cef33amshe576e689fc34c2ep164d84jsne2221da15dab")
@@ -200,9 +214,5 @@ public class StockDaoImpl implements StockDao {
 		}
 		return response.body();
 	}
-
-
-
-
 
 }
